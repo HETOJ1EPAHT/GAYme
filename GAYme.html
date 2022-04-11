@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 05</title>
+  </head>
+
+  <body>
+    <p>guess a number</p>
+    <input id="input" type="text" autofocus />
+    <button id="check">Check</button>
+    <script>
+      alert("guess a number from 0 to 100");
+
+      let randomValue = Math.floor(Math.random() * 101);
+      let count = 0;
+      let timer = new Date();
+      let p = document.querySelector("p");
+      let input = document.querySelector("#input");
+      let check = document.querySelector("#check");
+      let result;
+
+      check.addEventListener("click", checkNum);
+      document.body.addEventListener("keydown", (e) => {
+        if (e.key == "Enter") checkNum();
+      });
+
+      function checkNum() {
+        count++;
+
+        if (input.value == randomValue) {
+          let over = new Date();
+          let time = Math.floor((over - timer) / 1000);
+
+          p.innerText = "win";
+          alert(
+            `WIN. Number is: ${randomValue}. Attempt:${count}. Time: ${time} sec.  `
+          );
+
+          if (confirm("Try again")) {
+            window.location.reload();
+          }
+        }
+        if (input.value > randomValue) {
+          p.innerText = `Number less than ${input.value}`;
+        }
+        if (input.value < randomValue) {
+          p.innerText = `Number greater than ${input.value}`;
+        }
+        input.value = ``;
+      }
+
+      console.log(randomValue);
+    </script>
+  </body>
+</html>
